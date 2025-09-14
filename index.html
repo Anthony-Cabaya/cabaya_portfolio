@@ -15,8 +15,27 @@
     <nav id="desktop-nav">
         <div class="logo">Carlos Anthony C. Cabaya</div>
         <ul class="nav-links">
-            <li><a href="#about"></a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#work_experience">Work Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
         </ul>
+    </nav>
+    <nav id="hamburger-nav">
+        <div class="logo">Carlos Anthony C. Cabaya</div>
+        <div class="hamburger-menu">
+            <div class="hamburger-icon" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <div class="menu-links">
+                <li><a href="#about" onclick="toggleMenu()">About</a></li>
+                <li><a href="#work_experience" onclick="toggleMenu()">Work Experience</a></li>
+                <li><a href="#projects" onclick="toggleMenu()">Projects</a></li>
+                <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+            </div>
+        </div>
     </nav>
     <script src="script.js" defer></script>
 </body>
