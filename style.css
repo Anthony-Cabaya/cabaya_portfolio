@@ -153,3 +153,108 @@ a:hover::after {
 }
 
 /* Sections */
+section {
+    padding-top: 4vh;
+    height: 96vh;
+    margin: 0 10rem;
+    box-sizing: border-box;
+    min-height: fit-content;
+}
+
+.section-container {
+    display: flex;
+}
+
+/* Profile Section */
+#profile {
+    display: flex;
+    justify-content: center;
+    gap: 5rem;
+    height: 80vh;
+}
+
+.section pic-container {
+    display: flex;
+    height: 400px;
+    width: 400px;
+    margin: auto 0;
+}
+
+.section_text {
+    align-self: center;
+    text-align: center;
+}
+
+.section_text p {
+    font-weight: 600;
+}
+
+.section_text_p1 {
+    font-size: 1.7rem;
+    margin-bottom: 1rem;
+}
+
+.title {
+    font-size: 3rem;
+    text-align: center;
+}
+
+#socials-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    gap: 1rem;
+}
+
+/* Profile Link Icons */
+.icon {
+    cursor: pointer;
+    height: 2rem;
+}
+
+/* Profile Buttons */
+.btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.btn {
+    font-weight: 600;
+    transition: all 300ms ease;
+    padding: 1rem;
+    width: 12rem;
+    border-radius: 2rem;
+    border: rgb(53, 53, 53) 0.1rem solid;
+    cursor: pointer;
+}
+
+.btn-resume {
+    background-color: white;
+    color: rgb(53, 53, 53);
+}
+
+.btn-contact-info {
+    background-color: rgb(53, 53, 53);
+    color: white;
+}
+
+.btn-resume:hover {
+    background-color: rgb(53, 53, 53);
+    color: white;
+}
+
+.btn-resume:hover + .btn-contact-info {
+    background-color: white;
+    color: rgb(53, 53, 53);
+}
+
+.btn-contact-info:hover {
+    background-color: white;
+    color: rgb(53, 53, 53);
+}
+
+.btn-contact-info:hover ~ .btn-resume {
+    background-color: rgb(53, 53, 53);
+    color: white;
+}
