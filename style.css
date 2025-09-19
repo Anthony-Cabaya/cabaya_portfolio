@@ -239,22 +239,22 @@ section {
     color: white;
 }
 
-.btn-resume:hover {
-    background-color: rgb(53, 53, 53);
+.btn-container:has(.btn-resume:hover) .btn-resume {
+    background-color: rgb(53,53,53);
     color: white;
 }
 
-.btn-resume:hover + .btn-contact-info {
+.btn-container:has(.btn-resume:hover) .btn-contact-info {
     background-color: white;
-    color: rgb(53, 53, 53);
+    color: rgb(53,53,53);
 }
 
-.btn-contact-info:hover {
+.btn-container:has(.btn-contact-info:hover) .btn-contact-info {
     background-color: white;
-    color: rgb(53, 53, 53);
+    color: rgb(53,53,53);
 }
 
-.btn-contact-info:hover ~ .btn-resume {
-    background-color: rgb(53, 53, 53);
+.btn-container:has(.btn-contact-info:hover) .btn-resume {
+    background-color: rgb(53,53,53);
     color: white;
 }
