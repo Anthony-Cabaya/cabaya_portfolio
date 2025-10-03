@@ -258,3 +258,76 @@ section {
     background-color: rgb(53,53,53);
     color: white;
 }
+
+/* About Me Section */
+#about {
+    justify-content: center;
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+#about .title {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+/* 2-Sides Layout */
+.about-layout {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 30px;
+    margin-bottom: 40px;
+    align-items: start;
+}
+
+.description-abtme {
+    font-size: 18px;
+}
+
+.career-bg {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+.career-bg .education-card,
+.career-bg .experience-card {
+    padding: 20px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.career-bg h3 {
+    text-align: center;
+}
+
+.tech-skills {
+    max-width: 1000px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.tech-skills p {
+    margin: 10px 0;
+}
+
+.tech-skills b {
+    color: #333;
+}
+
+.skill {
+    display: inline-block;
+    margin: 4px 6px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: #f0f0f0;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.skill:hover {
+    background-color: rgb(53,53,53);
+    color: white;
+}
