@@ -271,7 +271,6 @@ section {
 #about .title {
     text-align: center;
     margin-bottom: 40px;
-    font-size: 2.5rem;
     font-weight: 600;
 }
 
@@ -357,4 +356,75 @@ section {
 .skill:hover {
     background-color: rgb(53,53,53);
     color: white;
+}
+
+/* Projects Section */
+.projects-section {
+    text-align: center;
+    padding: 80px 20px;
+}
+
+.projects-slider {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.projects-section .title {
+    text-align: center;
+    margin-bottom: 40px;
+    font-weight: 600;
+}
+
+.project-cards {
+    display: flex;
+    transition: transform 0.5s ease;
+}
+
+.project-card {
+    width: 300px;
+    background: #1c1c1c;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(255, 102, 0, 0.3);
+    margin: 0 10px;
+}
+
+.project-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+.proj-nav-btn {
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    color: white;
+    font-size: 30px;
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background 0.3s;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+    background: rgba(0,0,0,0.7);
+    padding: 40px 0;
 }

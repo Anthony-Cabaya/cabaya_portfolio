@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="mediaqueries.css">
 </head>
+
 <body>
     <nav id="desktop-nav">
         <div class="logo">Carlos Anthony C. Cabaya</div>
@@ -52,8 +54,10 @@
                 </button>
             </div>
             <div id="socials-container">
-                <img src="./assets/linkedin.png" alt="My LinkedIn" class="icon" onclick="window.open('https://www.linkedin.com/in/cabaya-anthony', '_blank')">
-                <img src="./assets/github.png" alt="My Github" class="icon" onclick="window.open('https://www.github.com/Anthony-Cabaya', '_blank')">
+                <img src="./assets/linkedin.png" alt="My LinkedIn" class="icon"
+                    onclick="window.open('https://www.linkedin.com/in/cabaya-anthony', '_blank')">
+                <img src="./assets/github.png" alt="My Github" class="icon"
+                    onclick="window.open('https://www.github.com/Anthony-Cabaya', '_blank')">
             </div>
         </div>
     </section>
@@ -63,16 +67,16 @@
         <div class="about-layout">
             <div class="description-abtme">
                 <p>
-                    I am a <b>Computer Engineering graduate</b> and passionate about 
-                    becoming an IoT & Embedded Systems Enthusiast and 
-                    Junior Software Developer. Currently learning 
-                    HTML, CSS, JavaScript and diving into 
-                    React/Next.js for web development, as well as 
+                    I am a <b>Computer Engineering graduate</b> and passionate about
+                    becoming an IoT & Embedded Systems Enthusiast and
+                    Junior Software Developer. Currently learning
+                    HTML, CSS, JavaScript and diving into
+                    React/Next.js for web development, as well as
                     Flutter for app development. <br><br>
-                    I am also strengthening my C++ Arduino IDE coding skills 
-                    and learning C for embedded systems, while exploring 
-                    OpenCV, TensorFlow, and YOLOv8 for computer vision and AI. 
-                    My goal is to combine microcontroller programming with 
+                    I am also strengthening my C++ Arduino IDE coding skills
+                    and learning C for embedded systems, while exploring
+                    OpenCV, TensorFlow, and YOLOv8 for computer vision and AI.
+                    My goal is to combine microcontroller programming with
                     AI technologies for IoT & automation projects.
                 </p>
             </div>
@@ -83,7 +87,7 @@
                     <p>
                         Rizal Technological University – Pasig Campus <br>
                         <em>Bachelor’s Degree in Computer Engineering<br>
-                        Aug 2020 – Mar 2025</em>
+                            Aug 2020 – Mar 2025</em>
                     </p>
                 </div>
                 <div class="experience-card">
@@ -91,14 +95,14 @@
                     <p>
                         Neksjob Philippines <br>
                         <em>Web Developer Intership <br>
-                        Jan 2024 – Mar 2024</em> <br>
+                            Jan 2024 – Mar 2024</em> <br>
                         For more details Check out my experience on
                         <a href="https://www.linkedin.com/in/cabaya-anthony" target="_blank">LinkedIn</a>
                     </p>
                 </div>
             </div>
         </div>
-        
+
         <div class="tech-skills">
             <h3>🛠 Skills</h3>
             <p><b>Languages:</b>
@@ -118,14 +122,14 @@
             <p><b>Database:</b>
                 <span class="skill">Firebase Realtime</span>
             </p>
-            
+
             <p><b>Tools:</b>
                 <span class="skill">VS Code</span>
                 <span class="skill">Android Studio</span>
                 <span class="skill">Git/Github</span>
                 <span class="skill">VB.NET</span>
             </p>
-            
+
             <p><b>IoT & Embedded:</b>
                 <span class="skill">Arduino Uno</span>
                 <span class="skill">ESP32</span>
@@ -134,6 +138,89 @@
             </p>
         </div>
     </section>
+
+    <section id="projects" class="projects-section">
+        <h1 class="title">Projects</h1>
+
+        <div class="projects-slider">
+            <button class="proj-nav-btn left">&#10094;</button>
+
+            <div class="project-cards">
+                <div class="project-card" data-index="0">
+                    <img src="assets/Clinic_system_profile.png" alt="Clinic Information Management System">
+                    <h3>Clinic Information Management System</h3>
+                    <p>VB.net System</p>
+                    <button class="view-btn">More Details</button>
+                </div>
+                <div class="project-card" data-index="1">
+                    <img src="assets/Grocery_website_profile.png" alt="Grocery Mart E-commerce Website">
+                    <h3>Grocery Mart E-commerce Website</h3>
+                    <p>WordPress Website</p>
+                    <button class="view-btn">More Details</button>
+                </div>
+                <div class="project-card" data-index="2">
+                    <img src="assets/Incub_embedded_profile.jpg" alt="Automated Egg Incubator Embedded System">
+                    <h3>Automated Egg Incubator Embedded System</h3>
+                    <p>Embedded System</p>
+                    <button class="view-btn">More Details</button>
+                </div>
+                <div class="project-card" data-index="3">
+                    <img src="assets/mangoQ_capstone_profile.png" alt="Capstone: Conveyor MangoQ">
+                    <h3>Capstone: Conveyor MangoQ</h3>
+                    <p>Conveyor AI & IoT System</p>
+                    <button class="view-btn">More Details</button>
+                </div>
+                <div class="project-card" data-index="4">
+                    <img src="assets/FishFeeder_profile.jpg" alt="Automatic Fish Feeder">
+                    <h3>Automatic Fish Feeder</h3>
+                    <p>Application & IoT System</p>
+                    <button class="view-btn">More Details</button>
+                </div>
+            </div>
+
+            <button class="proj-nav-btn right">&#10095;</button>
+        </div>
+        <div id="project-modal" class="modal">
+            <div class="project-details">
+                <span class="close">&times;</span>
+
+                <div class="thumbnails">
+                    <button class="thumb-nav-btn left-btn">&#10094;</button>
+                    <img id="thumbnails-img" src="" alt="Project Image">
+                    <button class="thumb-nav-btn right-btn">&#10095;</button>
+                </div>
+
+                <div class="proj-details">
+                    <h3 id="proj-title">Project Title</h3>
+                    <p id="proj-sub">Project Subtitle</p>
+
+                    <div class="inline-role">
+                        <strong>Role:</strong>
+                        <div class="tag-list" id="role-tags"></div>
+                    </div>
+
+                    <div class="inline-tech">
+                        <strong>Tech Stack:</strong>
+                        <div class="tag-list" id="tech-tags"></div>
+                    </div>
+
+                    <div class="inline-date">
+                        <strong>Date:</strong>
+                        <span id="date-text"></span>
+                    </div>
+
+                    <div class="proj-full-details"></div>
+
+                    <div class="proj-links">
+                        <a href="#" target="_blank">🌐 Website</a>
+                        <a href="#" target="_blank">💻 GitHub</a>
+                        <a href="#" target="_blank">📄 PDF</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
     <script src="script.js" defer></script>
 </body>
+
 </html>
