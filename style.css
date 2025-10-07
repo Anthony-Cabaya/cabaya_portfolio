@@ -362,6 +362,8 @@ section {
 .projects-section {
     text-align: center;
     padding: 80px 20px;
+    background-color: #fff;
+    position: relative;
 }
 
 .projects-slider {
@@ -372,6 +374,7 @@ section {
     overflow: hidden;
     max-width: 1000px;
     margin: 0 auto;
+    padding: 10px 60px;
 }
 
 .projects-section .title {
@@ -380,17 +383,31 @@ section {
     font-weight: 600;
 }
 
+/* Projects Card */
 .project-cards {
     display: flex;
     transition: transform 0.5s ease;
+    gap: 25px;
+    justify-content: flex-start;
 }
 
 .project-card {
-    width: 300px;
-    background: #1c1c1c;
+    width: 280px;
+    height: 380px;
+    background: white;
+    border: 2px solid rgb(53, 53, 53);
     border-radius: 10px;
-    box-shadow: 0 0 15px rgba(255, 102, 0, 0.3);
-    margin: 0 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    overflow: hidden;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(53, 53, 53, 0.25);
 }
 
 .project-card img {
@@ -401,30 +418,145 @@ section {
     border-top-right-radius: 10px;
 }
 
+.project-card h3 {
+    color: rgb(53, 53, 53);
+    font-size: 1.2rem;
+    margin: 15px 10 5px;
+    flex-grow: 0;
+}
+
+.project-card p {
+    color: rgb(85, 85, 85);
+    margin: 0 10px 15px;
+    font-size: 0.95rem;
+    flex-grow: 0;
+}
+
+.view-btn {
+    background-color: rgb(53, 53, 53);
+    color: white;
+    border: 2px solid transparent;
+    border-radius: 20px;
+    padding: 10px 20px;
+    margin: auto 10px 15px 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    flex-grow: 0;
+}
+
+.view-btn:hover {
+    background-color: white;
+    color: rgb(53, 53, 53);
+    border: 2px solid rgb(53, 53, 53);
+}
+
 .proj-nav-btn {
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(53, 53, 53, 0.9);
     border: none;
     color: white;
-    font-size: 30px;
-    padding: 10px 15px;
+    font-size: 24px;
+    padding: 12px 16px;
     cursor: pointer;
     border-radius: 50%;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     z-index: 10;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.proj-nav-btn:hover {
+    background: rgb(53, 53, 53);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.prev-btn {
+    left: 10px;
+}
+
+.next-btn {
+    right: 10px;
 }
 
 .modal {
     display: none;
     position: fixed;
-    z-index: 1000;
+    z-index: 2000;
     left: 0;
     top: 0;
     width: 100%;
     height: 100%;
     overflow-y: auto;
-    background: rgba(0,0,0,0.7);
-    padding: 40px 0;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 50px 20px;
+}
+
+.project-details {
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    color: #333;
+    max-width: 900px;
+    margin: 0 auto;
+    border-radius: 12px;
+    padding: 30px;
+    position: relative;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.project-details .close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    font-size: 26px;
+    cursor: pointer;
+    color: #333;
+    transition: color 0.3s;
+}
+
+.project-details .close:hover {
+    color: #000;
+}
+
+.thumbnails img {
+    width: 100px;
+    border-radius: 8px;
+    height: 400px;
+    object-fit: cover;
+}
+
+.nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    font-size: 24px;
+    padding: 8px 12px;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.nav-btn:hover {
+    background: #ff6600;
+    color: #fff;
+}
+
+.left-btn {
+    left: 10px;
+}
+
+.right-btn {
+    right: 10px;
+}
+
+.project-details h3 {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
 }

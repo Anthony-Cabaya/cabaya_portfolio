@@ -9,4 +9,16 @@
     .career-bg {
         grid-template-columns: 1fr;
     }
+
+    .projects-slider {
+        padding: 10px 40px;
+        max-width: 100%;
+    }
+
+    .proj-nav-btn {
+        width: 40px;
+        height: 40px;
+        font-size: 20px;
+        padding: 10px 14px;
+    }
 }
