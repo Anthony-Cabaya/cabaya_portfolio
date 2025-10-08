@@ -372,9 +372,9 @@ section {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto;
-    padding: 10px 60px;
+    padding: 10px 80px;
 }
 
 .projects-section .title {
@@ -387,18 +387,21 @@ section {
 .project-cards {
     display: flex;
     transition: transform 0.5s ease;
-    gap: 25px;
-    justify-content: flex-start;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: relative;
 }
 
 .project-card {
-    width: 280px;
-    height: 380px;
+    width: 320px;
+    height: 420px;
     background: white;
     border: 2px solid rgb(53, 53, 53);
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+    transition: all 0.5s ease;
     overflow: hidden;
     flex-shrink: 0;
     display: flex;
@@ -412,23 +415,24 @@ section {
 
 .project-card img {
     width: 100%;
-    height: 200px;
+    height: 240px;
     object-fit: cover;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
 }
 
 .project-card h3 {
     color: rgb(53, 53, 53);
-    font-size: 1.2rem;
-    margin: 15px 10 5px;
+    font-size: 1.3rem;
+    margin: 20px 15px 8px;
     flex-grow: 0;
+    font-weight: 600;
 }
 
 .project-card p {
     color: rgb(85, 85, 85);
-    margin: 0 10px 15px;
-    font-size: 0.95rem;
+    margin: 0 15px 15px;
+    font-size: 1rem;
     flex-grow: 0;
 }
 
@@ -436,19 +440,21 @@ section {
     background-color: rgb(53, 53, 53);
     color: white;
     border: 2px solid transparent;
-    border-radius: 20px;
-    padding: 10px 20px;
-    margin: auto 10px 15px 10px;
+    border-radius: 25px;
+    padding: 12px 24px;
+    margin: auto 15px 20px 15px;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.3s ease;
     flex-grow: 0;
+    font-size: 1rem;
 }
 
 .view-btn:hover {
     background-color: white;
     color: rgb(53, 53, 53);
     border: 2px solid rgb(53, 53, 53);
+    transform: translateY(-2px);
 }
 
 .proj-nav-btn {
@@ -484,79 +490,274 @@ section {
     right: 10px;
 }
 
+/* Project Modal */
 .modal {
     display: none;
     position: fixed;
-    z-index: 2000;
-    left: 0;
+    z-index: 999;
     top: 0;
+    left: 0;
     width: 100%;
     height: 100%;
-    overflow-y: auto;
     background: rgba(0, 0, 0, 0.7);
-    padding: 50px 20px;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
 }
 
 .project-details {
     display: flex;
-    flex-direction: column;
-    background: #fff;
-    color: #333;
-    max-width: 900px;
-    margin: 0 auto;
+    background: white;
+    width: 90%;
+    max-width: 1100px;
+    max-height: 85vh;
     border-radius: 12px;
-    padding: 30px;
+    overflow: hidden;
     position: relative;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.3s ease;
 }
 
-.project-details .close {
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    } to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.close {
     position: absolute;
     top: 15px;
     right: 20px;
-    font-size: 26px;
+    font-size: 32px;
     cursor: pointer;
-    color: #333;
-    transition: color 0.3s;
+    color: rgb(53, 53, 53);
+    z-index: 10;
+    background: rgba(255, 255, 255, 0.9);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    border: 2px solid rgb(53, 53, 53);
 }
 
-.project-details .close:hover {
-    color: #000;
+.close:hover {
+    background: rgb(53, 53, 53);
+    color: white;
+    transform: scale(1.1);
+}
+
+.thumbnails {
+    flex: 1;
+    position: relative;
+    background: #f8f8f8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 450px;
+    overflow: hidden;
+    border: none !important;
 }
 
 .thumbnails img {
-    width: 100px;
-    border-radius: 8px;
-    height: 400px;
-    object-fit: cover;
+    width: 100%;
+    height: auto;
+    max-height: 500px;
+    object-fit: contain;
+    display: block;
+    border: none !important;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
-.nav-btn {
+.thumb-nav-btn {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: rgba(255, 255, 255, 0.8);
+    background: rgba(53, 53, 53, 0.8);
     border: none;
-    font-size: 24px;
-    padding: 8px 12px;
+    font-size: 20px;
+    padding: 12px 16px;
     cursor: pointer;
     border-radius: 50%;
+    color: white;
+    transition: all 0.3s ease;
+    z-index: 5;
+    width: 45px;
+    height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.nav-btn:hover {
-    background: #ff6600;
-    color: #fff;
+.thumb-nav-btn:hover {
+    background: rgb(53, 53, 53);
+    transform: translateY(-50%) scale(1.1);
 }
 
 .left-btn {
-    left: 10px;
+    left: 20px;
 }
 
 .right-btn {
-    right: 10px;
+    right: 20px;
 }
 
-.project-details h3 {
-    font-size: 1.6rem;
+.project-details {
+    flex: 1;
+    padding: 35px;
+    overflow-y: auto;
+    max-height: 80vh;
+    color: rgb(53, 53, 53);
+}
+
+#proj-title {
+    color: rgb(53, 53, 53);
+    font-size: 2.2rem;
     margin-bottom: 10px;
+    font-weight: 600;
+}
+
+#proj-sub {
+    color: rgb(85, 85, 85);
+    font-size: 1.3rem;
+    margin-bottom: 30px;
+}
+
+.inline-role,
+.inline-tech,
+.inline-date {
+    margin: 18px 0;
+    display: flex;
+    align-items: flex-start;
+}
+
+.inline-role strong,
+.inline-tech strong,
+.inline-date strong {
+    color: rgb(53, 53, 53);
+    min-width: 110px;
+    margin-right: 15px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    cursor: default;
+}
+
+.tag-list span {
+    background: #f0f0f0;
+    color: rgb(53, 53, 53);
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    border: 1px solid rgb(53, 53, 53);
+    transition: all 0.3s ease;
+}
+
+.tag-list span:hover {
+    background: rgb(53, 53, 53);
+    color: white;
+}
+
+#date-text {
+    color: rgb(85, 85, 85);
+    font-size: 1.1rem;
+}
+
+.proj-full-details {
+    margin: 30px 0;
+    line-height: 1.7;
+    color: rgb(85, 85, 85);
+    font-size: 1.05rem;
+}
+
+.proj-links {
+    display: flex;
+    gap: 15px;
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+.proj-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    color: white;
+    background: rgb(53, 53, 53);
+    padding: 12px 24px;
+    border-radius: 25px;
+    border: 2px solid rgb(53, 53, 53);
+    transition: all 0.3s ease;
+    font-weight: 500;
+    outline: none;
+    box-shadow: none;
+}
+
+.proj-links a:hover {
+    background: white;
+    color: rgb(53, 53, 53);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(53, 53, 53, 0.2);
+    border: 2px solid rgb(53, 53, 53);
+}
+
+.proj-links a.hidden {
+    display: none !important;
+}
+
+.thumbnails img:not([src]),
+.thumbnails img[src=""],
+.thumbnails img:not([src]):not([alt]) {
+    display: none;
+}
+
+.thumbnails {
+    border: 2px solid blue !important; /* To see thumbnail area */
+}
+
+.thumbnails img {
+    border: 2px solid green !important; /* To see image boundaries */
+    background-color: #f0f0f0; /* Fallback background if image missing */
+}
+
+.thumbnails:has(img[src]) {
+    min-height: 450px;
+}
+
+.proj-links a {
+    border: 2px solid red !important; /* To see button boundaries */
+}
+
+/* Force image display in modal */
+#thumbnails-img {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    max-width: 100% !important;
+    max-height: 500px !important;
+    width: auto !important;
+    height: auto !important;
+}
+
+/* If image still doesn't show, add a background to see the container */
+.thumbnails {
+    background: 
+        linear-gradient(45deg, #f0f0f0 25%, transparent 25%),
+        linear-gradient(-45deg, #f0f0f0 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #f0f0f0 75%),
+        linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
 }

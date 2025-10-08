@@ -9,16 +9,51 @@
     .career-bg {
         grid-template-columns: 1fr;
     }
-
-    .projects-slider {
-        padding: 10px 40px;
-        max-width: 100%;
+    /* Project Slider */
+    .project-details {
+        flex-direction: column;
+        width: 95%;
+        max-height: 90vh;
     }
-
-    .proj-nav-btn {
+    
+    .thumbnails {
+        min-height: 300px;
+    }
+    
+    .thumbnails img {
+        max-height: 350px;
+    }
+    
+    .proj-details {
+        padding: 25px;
+        max-height: 50vh;
+    }
+    
+    #proj-title {
+        font-size: 1.8rem;
+    }
+    
+    .inline-role,
+    .inline-tech,
+    .inline-date {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .inline-role strong,
+    .inline-tech strong,
+    .inline-date strong {
+        min-width: auto;
+    }
+    
+    .proj-links {
+        justify-content: center;
+    }
+    
+    .thumb-nav-btn {
         width: 40px;
         height: 40px;
-        font-size: 20px;
+        font-size: 18px;
         padding: 10px 14px;
     }
 }
