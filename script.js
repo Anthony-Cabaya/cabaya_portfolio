@@ -108,7 +108,7 @@ const projSub = document.getElementById('proj-sub');
 const roleTags = document.getElementById('role-tags');
 const techTags = document.getElementById('tech-tags');
 const dateText = document.getElementById('date-text');
-const projFullDetails = document.querySelector('.proj-full-details');
+const projFullDetails = document.querySelector('.proj-info .proj-full-details');
 const projLinks = document.querySelector('.proj-links');
 
 const projectData = [
@@ -118,18 +118,20 @@ const projectData = [
         role: ["Full Stack Developer"],
         tech: ["VB.NET", "MySQL"],
         date: "Nov 2021 - Dec 2021",
-        description: "Developed a comprehensive desktop application to streamline clinic operations, including patient check-in, medication logging, and inventory tracking. Implemented automated PDF report generation for patient records and inventory summaries to enhance data accuracy and administrative efficiency.",
+        description: 
+        `Developed a comprehensive desktop application to streamline 
+        clinic operations, including patient check-in, medication 
+        logging, and inventory tracking. Implemented automated PDF 
+        report generation for patient records and inventory summaries 
+        to enhance data accuracy and administrative efficiency.
+        A detailed system documentation PDF is also available, 
+        providing a full overview of the system’s features and workflows.`,
         images: [
-            "assets/clinic/clinic_pic1.png",
-            "assets/clinic/clinic_pic2.jpg", 
-            "assets/clinic/clinic_pic3.png", 
-            "assets/clinic/clinic_pic4.png", 
-            "assets/clinic/clinic_pic5.png", 
-            "assets/clinic/clinic_pic6.png", 
-            "assets/clinic/clinic_pic7.png", 
-            "assets/clinic/clinic_pic8.png", 
-            "assets/clinic/clinic_pic9.png", 
-            "assets/clinic/clinic_pic10.png", 
+            "assets/clinic/clinic_pic1.png", "assets/clinic/clinic_pic2.jpg", 
+            "assets/clinic/clinic_pic3.png", "assets/clinic/clinic_pic4.png", 
+            "assets/clinic/clinic_pic5.png", "assets/clinic/clinic_pic6.png", 
+            "assets/clinic/clinic_pic7.png", "assets/clinic/clinic_pic8.png", 
+            "assets/clinic/clinic_pic9.png", "assets/clinic/clinic_pic10.png", 
             "assets/clinic/clinic_pic11.png"
         ],
         links: {
@@ -152,6 +154,48 @@ const projectData = [
             pdf: ""
         }
     },
+    {
+        title: "Automated Egg Incubator Embedded System",
+        subtitle: "Embedded System",
+        role: ["Embedded Systems Engineer"],
+        tech: ["Arduino", "C++", "IoT"],
+        date: "2023",
+        description: "Designed and built an automated egg incubator with temperature and humidity control, automatic egg turning, and remote monitoring capabilities.",
+        images: ["assets/Incub_embedded_profile.jpg"],
+        links: {
+            website: "",
+            github: "",
+            pdf: ""
+        }
+    },
+    {
+        title: "Capstone: Conveyor MangoQ",
+        subtitle: "Conveyor AI & IoT System",
+        role: ["AI Developer", "IoT Specialist"],
+        tech: ["Python", "TensorFlow", "IoT", "Computer Vision"],
+        date: "2023",
+        description: "Developed an AI-powered conveyor system for mango quality assessment using computer vision and IoT sensors for real-time monitoring and sorting.",
+        images: ["assets/mangoQ_capstone_profile.png"],
+        links: {
+            website: "",
+            github: "",
+            pdf: ""
+        }
+    },
+    {
+        title: "Automatic Fish Feeder",
+        subtitle: "Application & IoT System",
+        role: ["Full Stack Developer", "IoT Engineer"],
+        tech: ["Mobile App", "IoT", "Arduino"],
+        date: "2022",
+        description: "Created an automatic fish feeding system with mobile app control, scheduling features, and remote monitoring capabilities.",
+        images: ["assets/FishFeeder_profile.jpg"],
+        links: {
+            website: "",
+            github: "",
+            pdf: ""
+        }
+    }
 ];
 
 let currentProjectIndex = 0;
@@ -166,11 +210,11 @@ viewButtons.forEach((button, index) => {
 });
 
 function openModal(projectIndex) {
+    if (!projectData[projectIndex]) {
+        return;
+    }
+
     const project = projectData[projectIndex];
-    
-    console.log('🖼️ Loading modal for:', project.title);
-    console.log('📁 All image paths:', project.images);
-    console.log('🔍 Current image to load:', project.images[currentImageIndex]);
     
     projTitle.textContent = project.title;
     projSub.textContent = project.subtitle;
@@ -190,36 +234,42 @@ function openModal(projectIndex) {
         span.textContent = tech;
         techTags.appendChild(span);
     });
-    
+
+    const imageCounter = document.createElement('div');
+    imageCounter.className = 'image-counter';
+    imageCounter.textContent = `${currentImageIndex + 1} / ${project.images.length}`;
+
+    const thumbnails = document.querySelector('.thumbnails');
+    const existingCounter = document.querySelector('.image-counter');
+    if (existingCounter) {
+        existingCounter.remove();
+    }
+    thumbnails.appendChild(imageCounter);
+
     const imagePath = project.images[currentImageIndex];
-    console.log('🔄 Loading image:', imagePath);
 
     thumbnailsImg.style.display = 'block';
     thumbnailsImg.style.visibility = 'visible';
     thumbnailsImg.style.opacity = '1';
-    thumbnailsImg.style.width = '100%';
+    thumbnailsImg.style.maxWidth = '100%';
+    thumbnailsImg.style.maxHeight = '100%';
+    thumbnailsImg.style.width = 'auto';
     thumbnailsImg.style.height = 'auto';
-    thumbnailsImg.style.maxHeight = '500px';
     thumbnailsImg.style.objectFit = 'contain';
+    thumbnailsImg.style.margin = 'auto';
 
     const testImage = new Image();
     testImage.onload = function() {
-        console.log('✅ Image loaded successfully:', imagePath);
         thumbnailsImg.src = imagePath;
         thumbnailsImg.alt = project.title + ' - Image ' + (currentImageIndex + 1);
         
-        // Force display after load
         setTimeout(() => {
             thumbnailsImg.style.display = 'block';
-            console.log('🖼️ Image should be visible now');
-        }, 100);
-    }
+        }, 50);
+    };
 
     testImage.onerror = function() {
-        console.error('❌ Image failed to load:', imagePath);
-        // Use the profile image as fallback
         const fallbackPath = 'assets/clinic/Clinic_system_profile.png';
-        console.log('🔄 Using fallback image:', fallbackPath);
         thumbnailsImg.src = fallbackPath;
         thumbnailsImg.alt = project.title + ' - Fallback Image';
     };
@@ -232,26 +282,20 @@ function openModal(projectIndex) {
     
     if (!project.links.website || project.links.website.trim() === "") {
         links[0].classList.add('hidden');
-        console.log('🌐 Website button: HIDDEN');
     } else {
         links[0].href = project.links.website;
-        console.log('🌐 Website button: SHOWN -', project.links.website);
     }
     
     if (!project.links.github || project.links.github.trim() === "") {
         links[1].classList.add('hidden');
-        console.log('💻 GitHub button: HIDDEN');
     } else {
         links[1].href = project.links.github;
-        console.log('💻 GitHub button: SHOWN -', project.links.github);
     }
     
     if (!project.links.pdf || project.links.pdf.trim() === "") {
         links[2].classList.add('hidden');
-        console.log('📄 PDF button: HIDDEN');
     } else {
         links[2].href = project.links.pdf;
-        console.log('📄 PDF button: SHOWN -', project.links.pdf);
     }
     
     modal.style.display = 'flex';
@@ -274,10 +318,19 @@ thumbNavLeft.addEventListener('click', () => {
     const project = projectData[currentProjectIndex];
     currentImageIndex = (currentImageIndex - 1 + project.images.length) % project.images.length;
     thumbnailsImg.src = project.images[currentImageIndex];
+    updateImageCounter(project);
 });
 
 thumbNavRight.addEventListener('click', () => {
     const project = projectData[currentProjectIndex];
     currentImageIndex = (currentImageIndex + 1) % project.images.length;
     thumbnailsImg.src = project.images[currentImageIndex];
+    updateImageCounter(project);
 });
+
+function updateImageCounter(project) {
+    const imageCounter = document.querySelector('.image-counter');
+    if (imageCounter) {
+        imageCounter.textContent = `${currentImageIndex + 1} / ${project.images.length}`;
+    }
+}

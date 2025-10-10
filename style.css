@@ -505,11 +505,21 @@ section {
     overflow: hidden;
 }
 
-.project-details {
+.modal-content-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+}
+
+.project-details-wrapper {
     display: flex;
     background: white;
     width: 90%;
-    max-width: 1100px;
+    max-width: 1200px;
+    height: 85vh;
     max-height: 85vh;
     border-radius: 12px;
     overflow: hidden;
@@ -560,20 +570,32 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 450px;
+    min-height: 100%;
     overflow: hidden;
-    border: none !important;
 }
 
 .thumbnails img {
-    width: 100%;
+    max-width: 95%;
+    max-height: 95%;
+    width: auto;
     height: auto;
-    max-height: 500px;
     object-fit: contain;
     display: block;
-    border: none !important;
-    visibility: visible !important;
-    opacity: 1 !important;
+    margin: auto;
+}
+
+.image-counter {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(53, 53, 53, 0.8);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    z-index: 5;
 }
 
 .thumb-nav-btn {
@@ -609,12 +631,13 @@ section {
     right: 20px;
 }
 
-.project-details {
-    flex: 1;
-    padding: 35px;
+.proj-info {
+    flex: 0.8;
+    padding: 40px;
     overflow-y: auto;
-    max-height: 80vh;
+    max-height: 100%;
     color: rgb(53, 53, 53);
+    min-width: 400px;
 }
 
 #proj-title {
@@ -636,6 +659,7 @@ section {
     margin: 18px 0;
     display: flex;
     align-items: flex-start;
+    text-align: left;
 }
 
 .inline-role strong,
@@ -651,7 +675,7 @@ section {
 .tag-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 8px;
     cursor: default;
 }
 
@@ -680,6 +704,7 @@ section {
     line-height: 1.7;
     color: rgb(85, 85, 85);
     font-size: 1.05rem;
+    text-align: left;
 }
 
 .proj-links {
@@ -702,7 +727,6 @@ section {
     transition: all 0.3s ease;
     font-weight: 500;
     outline: none;
-    box-shadow: none;
 }
 
 .proj-links a:hover {
@@ -710,54 +734,16 @@ section {
     color: rgb(53, 53, 53);
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(53, 53, 53, 0.2);
-    border: 2px solid rgb(53, 53, 53);
 }
 
 .proj-links a.hidden {
-    display: none !important;
-}
-
-.thumbnails img:not([src]),
-.thumbnails img[src=""],
-.thumbnails img:not([src]):not([alt]) {
     display: none;
 }
 
-.thumbnails {
-    border: 2px solid blue !important; /* To see thumbnail area */
+.proj-links a::after {
+    display: none;
 }
 
-.thumbnails img {
-    border: 2px solid green !important; /* To see image boundaries */
-    background-color: #f0f0f0; /* Fallback background if image missing */
-}
-
-.thumbnails:has(img[src]) {
-    min-height: 450px;
-}
-
-.proj-links a {
-    border: 2px solid red !important; /* To see button boundaries */
-}
-
-/* Force image display in modal */
-#thumbnails-img {
-    display: block !important;
-    visibility: visible !important;
-    opacity: 1 !important;
-    max-width: 100% !important;
-    max-height: 500px !important;
-    width: auto !important;
-    height: auto !important;
-}
-
-/* If image still doesn't show, add a background to see the container */
-.thumbnails {
-    background: 
-        linear-gradient(45deg, #f0f0f0 25%, transparent 25%),
-        linear-gradient(-45deg, #f0f0f0 25%, transparent 25%),
-        linear-gradient(45deg, transparent 75%, #f0f0f0 75%),
-        linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
-    background-size: 20px 20px;
-    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+.proj-links a:hover::after {
+    display: none;
 }
