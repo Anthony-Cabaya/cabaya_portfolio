@@ -143,25 +143,40 @@ const projectData = [
     {
         title: "Grocery Mart E-commerce Website",
         subtitle: "WordPress Website",
-        role: ["Frontend Developer", "UI/UX Designer"],
-        tech: ["WordPress", "PHP", "CSS", "JavaScript"],
-        date: "2024",
-        description: "A fully responsive e-commerce website with product catalog, shopping cart, and payment integration. Optimized for user experience and mobile devices.",
-        images: ["assets/Grocery_website_profile.png"],
+        role: ["Frontend Developer"],
+        tech: ["WordPress", "WooCommerce", "PHP", "CSS", "JavaScript"],
+        date: "Nov 2023 - Dec 2023",
+        description: 
+        `I developed and customized a WordPress based e-commerce 
+        website using WooCommerce to simulate an online grocery 
+        shopping system. I modified themes and templates using 
+        PHP, CSS, and JavaScript to improve layout, responsiveness, 
+        and user experience. The system includes product listings, 
+        a shopping cart, and secure PayPal payment integration. 
+        A detailed system documentation PDF is available, providing 
+        a full overview of the site’s features and workflows.`,
+        images: ["assets/grocery/Grocery_website_profile.png"],
         links: {
-            website: "https://example-grocery.com",
-            github: "https://github.com/yourusername/grocery-mart",
-            pdf: ""
+            website: "",
+            github: "",
+            pdf: "assets/grocery/GroceryMart_web.pdf"
         }
     },
     {
         title: "Automated Egg Incubator Embedded System",
         subtitle: "Embedded System",
-        role: ["Embedded Systems Engineer"],
-        tech: ["Arduino", "C++", "IoT"],
-        date: "2023",
-        description: "Designed and built an automated egg incubator with temperature and humidity control, automatic egg turning, and remote monitoring capabilities.",
-        images: ["assets/Incub_embedded_profile.jpg"],
+        role: ["Application Developer", "UI/UX Designer"],
+        tech: ["Android Studio", "Java"],
+        date: "Sep 2023 - Dec 2023",
+        description: 
+        `I designed the web and mobile UI/UX for the Automated 
+        Egg Incubator system, focusing on intuitive layouts 
+        and real-time monitoring visuals. The prototype 
+        automatically tracks temperature and humidity, turns 
+        eggs on schedule, monitors candling and hatching with 
+        photo updates, and triggers hygiene alerts with UV cleaning 
+        schedules.`,
+        images: ["assets/incub/Incub_embedded_profile.jpg", "assets/incub/Incub_pic1.jpg", "assets/incub/Incub_pic2.jpg"],
         links: {
             website: "",
             github: "",
@@ -171,28 +186,40 @@ const projectData = [
     {
         title: "Capstone: Conveyor MangoQ",
         subtitle: "Conveyor AI & IoT System",
-        role: ["AI Developer", "IoT Specialist"],
-        tech: ["Python", "TensorFlow", "IoT", "Computer Vision"],
-        date: "2023",
-        description: "Developed an AI-powered conveyor system for mango quality assessment using computer vision and IoT sensors for real-time monitoring and sorting.",
-        images: ["assets/mangoQ_capstone_profile.png"],
+        role: ["Application Developer", "IoT Developer", "Prototype Designer"],
+        tech: ["Android Studio (Java)", "Firebase", "Arduino IDE (C++)", "Python", "Raspberry Pi", "TinkerCAD (3D Prototype Design)"],
+        date: "Jan 2024 - Mar 2025",
+        description: 
+        `Developed a mobile application to record and display data 
+        on the number of sorted mangoes. Integrated IoT components 
+        such as servos for the sorter push arm and a load cell sensor 
+        for size-based automated sorting. Designed a 3D prototype in 
+        TinkerCAD to represent the system’s structure and functionality. 
+        A detailed thesis documentation PDF is available, providing full 
+        technical and research details of the system.`,
+        images: ["assets/mangoq/mangoQ_capstone_profile.png"],
         links: {
             website: "",
             github: "",
-            pdf: ""
+            pdf: "assets/mangoq/MangoQ_Capstone.pdf"
         }
     },
     {
         title: "Automatic Fish Feeder",
         subtitle: "Application & IoT System",
-        role: ["Full Stack Developer", "IoT Engineer"],
-        tech: ["Mobile App", "IoT", "Arduino"],
-        date: "2022",
-        description: "Created an automatic fish feeding system with mobile app control, scheduling features, and remote monitoring capabilities.",
-        images: ["assets/FishFeeder_profile.jpg"],
+        role: ["Flutter Developer", "IoT Developer"],
+        tech: ["Flutter (Dart)", "Firebase", "Arduino IDE (C++)"],
+        date: "Jul 2025 - Jul 2025",
+        description: 
+        `Developed a Flutter mobile app and ESP32 firmware for automated 
+        fish feeding with real-time scheduling, Firebase integration, and 
+        remote monitoring. Implemented precise stepper motor control for 
+        consistent feed dispensing. The full system, including the app and 
+        IoT firmware, is available on GitHub.`,
+        images: ["assets/fishfeed/FishFeeder_profile.jpg", "assets/fishfeed/fishfeeder_app.png", "assets/fishfeed/fishfeeder_video.mp4"],
         links: {
             website: "",
-            github: "",
+            github: "https://github.com/Anthony-Cabaya/FeedFishProject",
             pdf: ""
         }
     }
@@ -248,33 +275,38 @@ function openModal(projectIndex) {
 
     const imagePath = project.images[currentImageIndex];
 
-    thumbnailsImg.style.display = 'block';
-    thumbnailsImg.style.visibility = 'visible';
-    thumbnailsImg.style.opacity = '1';
-    thumbnailsImg.style.maxWidth = '100%';
-    thumbnailsImg.style.maxHeight = '100%';
-    thumbnailsImg.style.width = 'auto';
-    thumbnailsImg.style.height = 'auto';
-    thumbnailsImg.style.objectFit = 'contain';
-    thumbnailsImg.style.margin = 'auto';
+    const isVideo = imagePath.toLowerCase().endsWith('.mp4') || imagePath.toLowerCase().endsWith('.webm') || imagePath.toLowerCase().endsWith('.ogg');
 
-    const testImage = new Image();
-    testImage.onload = function() {
+    if (isVideo) {
+        thumbnailsImg.style.display = 'none';
+
+        const existingVideo = document.querySelector('#thumbnails-video');
+        if (existingVideo) existingVideo.remove();
+
+        const video = document.createElement('video');
+        video.id = 'thumbnails-video';
+        video.src = imagePath;
+        video.controls = true;
+        video.style.maxWidth = '90%';
+        video.style.maxHeight = '90%';
+        video.style.margin = 'auto';
+        video.style.display = 'block';
+
+        document.querySelector('.thumbnails').appendChild(video);
+    } else {
+        thumbnailsImg.style.display = 'block';
+        thumbnailsImg.style.visibility = 'visible';
+        thumbnailsImg.style.opacity = '1';
+        thumbnailsImg.style.maxWidth = '100%';
+        thumbnailsImg.style.maxHeight = '100%';
+        thumbnailsImg.style.width = 'auto';
+        thumbnailsImg.style.height = 'auto';
+        thumbnailsImg.style.objectFit = 'contain';
+        thumbnailsImg.style.margin = 'auto';
+
         thumbnailsImg.src = imagePath;
         thumbnailsImg.alt = project.title + ' - Image ' + (currentImageIndex + 1);
-        
-        setTimeout(() => {
-            thumbnailsImg.style.display = 'block';
-        }, 50);
-    };
-
-    testImage.onerror = function() {
-        const fallbackPath = 'assets/clinic/Clinic_system_profile.png';
-        thumbnailsImg.src = fallbackPath;
-        thumbnailsImg.alt = project.title + ' - Fallback Image';
-    };
-
-    testImage.src = imagePath;
+    }
     
     const links = projLinks.querySelectorAll('a');
     
@@ -317,20 +349,52 @@ modal.addEventListener('click', (e) => {
 thumbNavLeft.addEventListener('click', () => {
     const project = projectData[currentProjectIndex];
     currentImageIndex = (currentImageIndex - 1 + project.images.length) % project.images.length;
-    thumbnailsImg.src = project.images[currentImageIndex];
+    loadCurrentMedia(project);
     updateImageCounter(project);
 });
 
 thumbNavRight.addEventListener('click', () => {
     const project = projectData[currentProjectIndex];
     currentImageIndex = (currentImageIndex + 1) % project.images.length;
-    thumbnailsImg.src = project.images[currentImageIndex];
+    loadCurrentMedia(project);
     updateImageCounter(project);
 });
 
-function updateImageCounter(project) {
-    const imageCounter = document.querySelector('.image-counter');
-    if (imageCounter) {
-        imageCounter.textContent = `${currentImageIndex + 1} / ${project.images.length}`;
+function loadCurrentMedia(project) {
+    const imagePath = project.images[currentImageIndex];
+    const isVideo = imagePath.toLowerCase().endsWith('.mp4') || 
+                    imagePath.toLowerCase().endsWith('.webm') || 
+                    imagePath.toLowerCase().endsWith('.ogg');
+
+    if (isVideo) {
+        thumbnailsImg.style.display = 'none';
+        
+        const existingVideo = document.querySelector('#thumbnails-video');
+        if (existingVideo) existingVideo.remove();
+        
+        const video = document.createElement('video');
+        video.id = 'thumbnails-video';
+        video.src = imagePath;
+        video.controls = true;
+        video.style.maxWidth = '90%';
+        video.style.maxHeight = '90%';
+        video.style.margin = 'auto';
+        video.style.display = 'block';
+        
+        document.querySelector('.thumbnails').appendChild(video);
+    } else {
+        thumbnailsImg.style.display = 'block';
+        thumbnailsImg.src = imagePath;
+        thumbnailsImg.alt = project.title + ' - Image ' + (currentImageIndex + 1);
+        
+        const existingVideo = document.querySelector('#thumbnails-video');
+        if (existingVideo) existingVideo.remove();
+    }
+
+    function updateImageCounter(project) {
+        const imageCounter = document.querySelector('.image-counter');
+        if (imageCounter) {
+            imageCounter.textContent = `${currentImageIndex + 1} / ${project.images.length}`;
+        }
     }
 }
