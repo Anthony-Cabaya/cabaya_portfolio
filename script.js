@@ -398,3 +398,25 @@ function loadCurrentMedia(project) {
         }
     }
 }
+
+// Contact functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const contactForm = document.getElementById('contactForm');
+    const sendBtn = document.querySelector('.send-message-btn');
+
+    if (contactForm) {
+        contactForm.addEventListener('submit', handleFormSubmit);
+
+        const inputs = contactForm.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('blur', validateField);
+            input.addEventListener('input', clearFieldError);
+        });
+    }
+});
+
+async function handleFormSubmit(event) {
+    event.preventDefault();
+
+    const form = event.target;
+}
