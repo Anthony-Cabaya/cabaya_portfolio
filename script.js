@@ -402,16 +402,9 @@ function loadCurrentMedia(project) {
 // Contact functionality
 document.addEventListener('DOMContentLoaded', function() {
     const contactForm = document.getElementById('contactForm');
-    const sendBtn = document.querySelector('.send-message-btn');
 
     if (contactForm) {
         contactForm.addEventListener('submit', handleFormSubmit);
-
-        const inputs = contactForm.querySelectorAll('input, textarea');
-        inputs.forEach(input => {
-            input.addEventListener('blur', validateField);
-            input.addEventListener('input', clearFieldError);
-        });
     }
 });
 
@@ -419,4 +412,220 @@ async function handleFormSubmit(event) {
     event.preventDefault();
 
     const form = event.target;
+    const formData = new FormData(form);
+    const sendButton = form.querySelector('.send-message-btn');
+    const originalButtonText = sendButton.textContent;
+
+    if (!validateForm(form)) {
+        showNotification('Please fill in all required fields correctly.', 'error');
+        return;
+    }
+
+    sendButton.textContent = 'Sending...';
+    sendButton.disabled = true;
+
+    try {
+        await simulateFormSubmission(formData);
+        showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
+        form.reset();
+        clearAllErrors(form);
+    } catch (error) {
+        showNotification('Sorry, there was an error sending your message. Please try again.', 'error');
+        console.error('Form submission error:', error)
+    } finally {
+        sendButton.textContent = originalButtonText;
+        sendButton.disabled = false;
+    }
 }
+
+function validateForm(form) {
+    let isValid = true;
+    const requiredFields = form.querySelectorAll('[required]');
+
+    requiredFields.forEach(field => {
+        if (!validateField({ target: field })) {
+            isValid = false;
+        }
+    });
+    return isValid;
+}
+
+function validateField(event) {
+    const field = event.target;
+    const value = field.value.trim();
+    const fieldName = field.getAttribute('name');
+    let isValid = true;
+    let errorMessage = '';
+
+    clearFieldError({ target: field });
+
+    if (field.hasAttribute('required') && !value) {
+        isValid = false;
+        errorMessage = 'This field is required';
+    }
+    if (fieldName === 'email' && value && !isValidEmail(value)) {
+        isValid = false;
+        errorMessage = 'Please enter a valid email address';
+    }
+    if (fieldName === 'name' && value && value.length < 2) {
+        isValid = false;
+        errorMessage = 'Name must be at least 2 characters long';
+    }
+    if (fieldName === 'subject' && value && value.length < 3) {
+        isValid = false;
+        errorMessage = 'Subject must be at least 3 characters long';
+    }
+    if (fieldName === 'message' && value && value.length < 10) {
+        isValid = false;
+        errorMessage = 'Message must be at least 10 characters long';
+    }
+    if (!isValid && errorMessage) {
+        showFieldError(field, errorMessage);
+    }
+    return isValid;
+}
+
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+function showFieldError(field, message) {
+    clearFieldError({ target: field });
+    field.classList.add('error');
+    
+    const errorElement = document.createElement('div');
+    errorElement.className = 'field-error';
+    errorElement.textContent = message;
+    errorElement.style.cssText = 
+        `color: #e74c3c;
+        font-size: 0.85rem;
+        margin-top: 5px;
+        font-weight: 500;
+    `;
+    field.parentNode.appendChild(errorElement);
+    field.style.borderColor = '#e74c3c';
+}
+
+function clearFieldError(event) {
+    const field = event.target;
+    const errorElement = field.parentNode.querySelector('.field-error');
+
+    if (errorElement) {
+        errorElement.remove();
+    }
+    field.classList.remove('error');
+    field.style.borderColor = '';
+}
+
+function clearAllErrors(form) {
+    const errorElement = form.querySelectorAll('.field-error');
+    const errorFields = form.querySelectorAll('.error');
+
+    errorElement.forEach(element => element.remove());
+    errorFields.forEach(field => {
+        field.classList.remove('error');
+        field.style.borderColor = '';
+    });
+}
+
+function simulateFormSubmission(formData) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            const isSuccess = Math.random() > 0.1;
+            
+            if (isSuccess) {
+                const formObject = {};
+                for (let [key, value] of formData.entries()) {
+                    formObject[key] = value;
+                }
+                console.log('Form data:', formObject);
+                resolve(formObject);
+            } else {
+                reject(new Error('Network error'));
+            }
+        }, 1500);
+    });
+}
+function showNotification(message, type = 'info') {
+    const existingNotification = document.querySelector('.form-notification');
+    if (existingNotification) {
+        existingNotification.remove();
+    }
+    
+    const notification = document.createElement('div');
+    notification.className = `form-notification form-notification-${type}`;
+    notification.textContent = message;
+    
+    notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        border-radius: 8px;
+        color: white;
+        font-weight: 500;
+        z-index: 1000;
+        max-width: 300px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        transform: translateX(400px);
+        transition: transform 0.3s ease;
+    `;
+    
+    const colors = {
+        success: '#27ae60',
+        error: '#e74c3c',
+        info: '#3498db'
+    };
+    
+    notification.style.backgroundColor = colors[type] || colors.info;
+    document.body.appendChild(notification);
+    
+    setTimeout(() => {
+        notification.style.transform = 'translateX(0)';
+    }, 100);
+    
+    setTimeout(() => {
+        notification.style.transform = 'translateX(400px)';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.remove();
+            }
+        }, 300);
+    }, 5000);
+    
+    notification.addEventListener('click', () => {
+        notification.style.transform = 'translateX(400px)';
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.remove();
+            }
+        }, 300);
+    });
+}
+
+const additionalStyles = `
+    .form-group input.error,
+    .form-group textarea.error {
+        border-color: #e74c3c !important;
+        background-color: #fdf2f2 !important;
+    }
+    
+    .send-message-btn:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none !important;
+    }
+    
+    .send-message-btn:disabled:hover {
+        background: rgb(53, 53, 53) !important;
+        color: white !important;
+        border: 2px solid rgb(53, 53, 53) !important;
+        transform: none !important;
+        box-shadow: 0 4px 12px rgba(53, 53, 53, 0.2) !important;
+    }
+`;
+
+const styleSheet = document.createElement('style');
+styleSheet.textContent = additionalStyles;
+document.head.appendChild(styleSheet);
