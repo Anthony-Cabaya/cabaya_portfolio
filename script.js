@@ -400,6 +400,109 @@ function updateImageCounter(project) {
 }
 
 // Contact functionality
+function validateForm(form) {
+    let isValid = true;
+    const requiredFields = form.querySelectorAll('[required]');
+
+    requiredFields.forEach(field => {
+        if (!validateField({ target: field })) {
+            isValid = false;
+        }
+    });
+    return isValid;
+}
+
+function validateField(event) {
+    const field = event.target;
+    const value = field.value.trim();
+    const fieldName = field.getAttribute('name');
+    let isValid = true;
+    let errorMessage = '';
+
+    clearFieldError({ target: field });
+
+    // Required field validation
+    if (field.hasAttribute('required') && !value) {
+        isValid = false;
+        errorMessage = 'This field is required';
+    }
+    
+    // Email validation
+    if (fieldName === 'email' && value && !isValidEmail(value)) {
+        isValid = false;
+        errorMessage = 'Please enter a valid email address';
+    }
+    
+    // Name validation
+    if (fieldName === 'name' && value && value.length < 2) {
+        isValid = false;
+        errorMessage = 'Name must be at least 2 characters long';
+    }
+    
+    // Subject validation
+    if (fieldName === 'subject' && value && value.length < 3) {
+        isValid = false;
+        errorMessage = 'Subject must be at least 3 characters long';
+    }
+    
+    // Message validation
+    if (fieldName === 'message' && value && value.length < 10) {
+        isValid = false;
+        errorMessage = 'Message must be at least 10 characters long';
+    }
+    
+    // Show error if invalid
+    if (!isValid && errorMessage) {
+        showFieldError(field, errorMessage);
+    }
+    
+    return isValid;
+}
+
+function isValidEmail(email) {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+}
+
+function showFieldError(field, message) {
+    clearFieldError({ target: field });
+    field.classList.add('error');
+    
+    const errorElement = document.createElement('div');
+    errorElement.className = 'field-error';
+    errorElement.textContent = message;
+    errorElement.style.cssText = 
+        `color: #e74c3c;
+        font-size: 0.85rem;
+        margin-top: 5px;
+        font-weight: 500;
+    `;
+    field.parentNode.appendChild(errorElement);
+    field.style.borderColor = '#e74c3c';
+}
+
+function clearFieldError(event) {
+    const field = event.target;
+    const errorElement = field.parentNode.querySelector('.field-error');
+
+    if (errorElement) {
+        errorElement.remove();
+    }
+    field.classList.remove('error');
+    field.style.borderColor = '';
+}
+
+function clearAllErrors(form) {
+    const errorElements = form.querySelectorAll('.field-error');
+    const errorFields = form.querySelectorAll('.error');
+
+    errorElements.forEach(element => element.remove());
+    errorFields.forEach(field => {
+        field.classList.remove('error');
+        field.style.borderColor = '';
+    });
+}
+
 document.addEventListener('DOMContentLoaded', function () {
     const contactForm = document.getElementById('contactForm');
 
@@ -439,6 +542,10 @@ async function handleFormSubmit(event) {
 }
 
 async function submitContactForm(formData) {
+    const userSubject = formData.get('subject');
+    const userName = formData.get('name');
+    const userEmail = formData.get('email');
+    
     const response = await fetch('https://formsubmit.co/ajax/cabaya24.anthony@gmail.com', {
         method: 'POST',
         headers: {
@@ -446,11 +553,14 @@ async function submitContactForm(formData) {
             'Accept': 'application/json'
         },
         body: JSON.stringify({
-            name: formData.get('name'),
-            email: formData.get('email'),
-            subject: formData.get('subject'),
+            name: userName,
+            email: userEmail,
+            subject: userSubject,
             message: formData.get('message'),
-            _replyto: formData.get('email')
+            _replyto: userEmail,
+            _subject: `New Portfolio Message from ${userName}`,
+            _from: `${userName} via Portfolio Website`,
+            _template: 'table'
         })
     });
 
