@@ -425,7 +425,7 @@ async function handleFormSubmit(event) {
     sendButton.disabled = true;
 
     try {
-        await simulateFormSubmission(formData);
+        await submitContactForm(formData);
         showNotification('Message sent successfully! I\'ll get back to you soon.', 'success');
         form.reset();
         clearAllErrors(form);
@@ -438,115 +438,29 @@ async function handleFormSubmit(event) {
     }
 }
 
-function validateForm(form) {
-    let isValid = true;
-    const requiredFields = form.querySelectorAll('[required]');
-
-    requiredFields.forEach(field => {
-        if (!validateField({ target: field })) {
-            isValid = false;
-        }
+async function submitContactForm(formData) {
+    const response = await fetch('https://formsubmit.co/ajax/cabaya24.anthony@gmail.com', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            name: formData.get('name'),
+            email: formData.get('email'),
+            subject: formData.get('subject'),
+            message: formData.get('message'),
+            _replyto: formData.get('email')
+        })
     });
-    return isValid;
-}
-
-function validateField(event) {
-    const field = event.target;
-    const value = field.value.trim();
-    const fieldName = field.getAttribute('name');
-    let isValid = true;
-    let errorMessage = '';
-
-    clearFieldError({ target: field });
-
-    if (field.hasAttribute('required') && !value) {
-        isValid = false;
-        errorMessage = 'This field is required';
-    }
-    if (fieldName === 'email' && value && !isValidEmail(value)) {
-        isValid = false;
-        errorMessage = 'Please enter a valid email address';
-    }
-    if (fieldName === 'name' && value && value.length < 2) {
-        isValid = false;
-        errorMessage = 'Name must be at least 2 characters long';
-    }
-    if (fieldName === 'subject' && value && value.length < 3) {
-        isValid = false;
-        errorMessage = 'Subject must be at least 3 characters long';
-    }
-    if (fieldName === 'message' && value && value.length < 10) {
-        isValid = false;
-        errorMessage = 'Message must be at least 10 characters long';
-    }
-    if (!isValid && errorMessage) {
-        showFieldError(field, errorMessage);
-    }
-    return isValid;
-}
-
-function isValidEmail(email) {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-}
-
-function showFieldError(field, message) {
-    clearFieldError({ target: field });
-    field.classList.add('error');
     
-    const errorElement = document.createElement('div');
-    errorElement.className = 'field-error';
-    errorElement.textContent = message;
-    errorElement.style.cssText = 
-        `color: #e74c3c;
-        font-size: 0.85rem;
-        margin-top: 5px;
-        font-weight: 500;
-    `;
-    field.parentNode.appendChild(errorElement);
-    field.style.borderColor = '#e74c3c';
-}
-
-function clearFieldError(event) {
-    const field = event.target;
-    const errorElement = field.parentNode.querySelector('.field-error');
-
-    if (errorElement) {
-        errorElement.remove();
+    if (!response.ok) {
+        throw new Error('Failed to send message');
     }
-    field.classList.remove('error');
-    field.style.borderColor = '';
+    
+    return response.json();
 }
 
-function clearAllErrors(form) {
-    const errorElement = form.querySelectorAll('.field-error');
-    const errorFields = form.querySelectorAll('.error');
-
-    errorElement.forEach(element => element.remove());
-    errorFields.forEach(field => {
-        field.classList.remove('error');
-        field.style.borderColor = '';
-    });
-}
-
-function simulateFormSubmission(formData) {
-    return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            const isSuccess = Math.random() > 0.1;
-            
-            if (isSuccess) {
-                const formObject = {};
-                for (let [key, value] of formData.entries()) {
-                    formObject[key] = value;
-                }
-                console.log('Form data:', formObject);
-                resolve(formObject);
-            } else {
-                reject(new Error('Network error'));
-            }
-        }, 1500);
-    });
-}
 function showNotification(message, type = 'info') {
     const existingNotification = document.querySelector('.form-notification');
     if (existingNotification) {
