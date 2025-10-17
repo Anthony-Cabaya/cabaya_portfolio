@@ -22,57 +22,57 @@ function updateCards() {
     if (isAnimating) return;
     isAnimating = true;
     const cardWidth = cards[0].offsetWidth + 30;
-    
+
     const leftIndex = getCircularIndex(currentIndex - 1);
     const centerIndex = currentIndex;
     const rightIndex = getCircularIndex(currentIndex + 1);
-    
+
     cards.forEach(card => {
         card.style.transition = 'opacity 0.3s ease, transform 0.4s ease';
         card.style.opacity = '0';
         card.style.transform = 'scale(0.9)';
     });
-    
+
     setTimeout(() => {
         cards.forEach(card => {
             card.style.display = 'flex';
             card.style.position = 'absolute';
         });
-        
+
         const leftCard = cards[leftIndex];
         leftCard.style.position = 'relative';
         leftCard.style.order = '1';
         leftCard.style.transform = 'translateX(-100%)';
-        
+
         const centerCard = cards[centerIndex];
         centerCard.style.position = 'relative';
         centerCard.style.order = '2';
         centerCard.style.transform = 'translateX(0) scale(0.9)';
-        
+
         const rightCard = cards[rightIndex];
         rightCard.style.position = 'relative';
         rightCard.style.order = '3';
         rightCard.style.transform = 'translateX(100%)';
-        
+
         setTimeout(() => {
             leftCard.style.transition = 'all 0.5s ease';
             centerCard.style.transition = 'all 0.5s ease';
             rightCard.style.transition = 'all 0.5s ease';
-            
+
             leftCard.style.opacity = '1';
             leftCard.style.transform = 'translateX(0) scale(1)';
-            
+
             centerCard.style.opacity = '1';
             centerCard.style.transform = 'translateX(0) scale(1)';
-            
+
             rightCard.style.opacity = '1';
             rightCard.style.transform = 'translateX(0) scale(1)';
-            
+
             projectCardsContainer.style.transform = `translateX(0)`;
-            
+
             isAnimating = false;
         }, 50);
-        
+
     }, 300);
 }
 
@@ -118,8 +118,8 @@ const projectData = [
         role: ["Full Stack Developer"],
         tech: ["VB.NET", "MySQL"],
         date: "Nov 2021 - Dec 2021",
-        description: 
-        `Developed a comprehensive desktop application to streamline 
+        description:
+            `Developed a comprehensive desktop application to streamline 
         clinic operations, including patient check-in, medication 
         logging, and inventory tracking. Implemented automated PDF 
         report generation for patient records and inventory summaries 
@@ -127,11 +127,11 @@ const projectData = [
         A detailed system documentation PDF is also available, 
         providing a full overview of the system’s features and workflows.`,
         images: [
-            "assets/clinic/clinic_pic1.png", "assets/clinic/clinic_pic2.jpg", 
-            "assets/clinic/clinic_pic3.png", "assets/clinic/clinic_pic4.png", 
-            "assets/clinic/clinic_pic5.png", "assets/clinic/clinic_pic6.png", 
-            "assets/clinic/clinic_pic7.png", "assets/clinic/clinic_pic8.png", 
-            "assets/clinic/clinic_pic9.png", "assets/clinic/clinic_pic10.png", 
+            "assets/clinic/clinic_pic1.png", "assets/clinic/clinic_pic2.jpg",
+            "assets/clinic/clinic_pic3.png", "assets/clinic/clinic_pic4.png",
+            "assets/clinic/clinic_pic5.png", "assets/clinic/clinic_pic6.png",
+            "assets/clinic/clinic_pic7.png", "assets/clinic/clinic_pic8.png",
+            "assets/clinic/clinic_pic9.png", "assets/clinic/clinic_pic10.png",
             "assets/clinic/clinic_pic11.png"
         ],
         links: {
@@ -146,8 +146,8 @@ const projectData = [
         role: ["Frontend Developer"],
         tech: ["WordPress", "WooCommerce", "PHP", "CSS", "JavaScript"],
         date: "Nov 2023 - Dec 2023",
-        description: 
-        `I developed and customized a WordPress based e-commerce 
+        description:
+            `I developed and customized a WordPress based e-commerce 
         website using WooCommerce to simulate an online grocery 
         shopping system. I modified themes and templates using 
         PHP, CSS, and JavaScript to improve layout, responsiveness, 
@@ -168,8 +168,8 @@ const projectData = [
         role: ["Application Developer", "UI/UX Designer"],
         tech: ["Android Studio", "Java"],
         date: "Sep 2023 - Dec 2023",
-        description: 
-        `I designed the web and mobile UI/UX for the Automated 
+        description:
+            `I designed the web and mobile UI/UX for the Automated 
         Egg Incubator system, focusing on intuitive layouts 
         and real-time monitoring visuals. The prototype 
         automatically tracks temperature and humidity, turns 
@@ -189,8 +189,8 @@ const projectData = [
         role: ["Application Developer", "IoT Developer", "Prototype Designer"],
         tech: ["Android Studio (Java)", "Firebase", "Arduino IDE (C++)", "Python", "Raspberry Pi", "TinkerCAD (3D Prototype Design)"],
         date: "Jan 2024 - Mar 2025",
-        description: 
-        `Developed a mobile application to record and display data 
+        description:
+            `Developed a mobile application to record and display data 
         on the number of sorted mangoes. Integrated IoT components 
         such as servos for the sorter push arm and a load cell sensor 
         for size-based automated sorting. Designed a 3D prototype in 
@@ -210,8 +210,8 @@ const projectData = [
         role: ["Flutter Developer", "IoT Developer"],
         tech: ["Flutter (Dart)", "Firebase", "Arduino IDE (C++)"],
         date: "Jul 2025 - Jul 2025",
-        description: 
-        `Developed a Flutter mobile app and ESP32 firmware for automated 
+        description:
+            `Developed a Flutter mobile app and ESP32 firmware for automated 
         fish feeding with real-time scheduling, Firebase integration, and 
         remote monitoring. Implemented precise stepper motor control for 
         consistent feed dispensing. The full system, including the app and 
@@ -242,19 +242,19 @@ function openModal(projectIndex) {
     }
 
     const project = projectData[projectIndex];
-    
+
     projTitle.textContent = project.title;
     projSub.textContent = project.subtitle;
     dateText.textContent = project.date;
     projFullDetails.textContent = project.description;
-    
+
     roleTags.innerHTML = '';
     project.role.forEach(role => {
         const span = document.createElement('span');
         span.textContent = role;
         roleTags.appendChild(span);
     });
-    
+
     techTags.innerHTML = '';
     project.tech.forEach(tech => {
         const span = document.createElement('span');
@@ -307,29 +307,29 @@ function openModal(projectIndex) {
         thumbnailsImg.src = imagePath;
         thumbnailsImg.alt = project.title + ' - Image ' + (currentImageIndex + 1);
     }
-    
+
     const links = projLinks.querySelectorAll('a');
-    
+
     links.forEach(link => link.classList.remove('hidden'));
-    
+
     if (!project.links.website || project.links.website.trim() === "") {
         links[0].classList.add('hidden');
     } else {
         links[0].href = project.links.website;
     }
-    
+
     if (!project.links.github || project.links.github.trim() === "") {
         links[1].classList.add('hidden');
     } else {
         links[1].href = project.links.github;
     }
-    
+
     if (!project.links.pdf || project.links.pdf.trim() === "") {
         links[2].classList.add('hidden');
     } else {
         links[2].href = project.links.pdf;
     }
-    
+
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
 }
@@ -362,16 +362,16 @@ thumbNavRight.addEventListener('click', () => {
 
 function loadCurrentMedia(project) {
     const imagePath = project.images[currentImageIndex];
-    const isVideo = imagePath.toLowerCase().endsWith('.mp4') || 
-                    imagePath.toLowerCase().endsWith('.webm') || 
-                    imagePath.toLowerCase().endsWith('.ogg');
+    const isVideo = imagePath.toLowerCase().endsWith('.mp4') ||
+        imagePath.toLowerCase().endsWith('.webm') ||
+        imagePath.toLowerCase().endsWith('.ogg');
 
     if (isVideo) {
         thumbnailsImg.style.display = 'none';
-        
+
         const existingVideo = document.querySelector('#thumbnails-video');
         if (existingVideo) existingVideo.remove();
-        
+
         const video = document.createElement('video');
         video.id = 'thumbnails-video';
         video.src = imagePath;
@@ -380,27 +380,27 @@ function loadCurrentMedia(project) {
         video.style.maxHeight = '90%';
         video.style.margin = 'auto';
         video.style.display = 'block';
-        
+
         document.querySelector('.thumbnails').appendChild(video);
     } else {
         thumbnailsImg.style.display = 'block';
         thumbnailsImg.src = imagePath;
         thumbnailsImg.alt = project.title + ' - Image ' + (currentImageIndex + 1);
-        
+
         const existingVideo = document.querySelector('#thumbnails-video');
         if (existingVideo) existingVideo.remove();
     }
+}
 
-    function updateImageCounter(project) {
-        const imageCounter = document.querySelector('.image-counter');
-        if (imageCounter) {
-            imageCounter.textContent = `${currentImageIndex + 1} / ${project.images.length}`;
-        }
+function updateImageCounter(project) {
+    const imageCounter = document.querySelector('.image-counter');
+    if (imageCounter) {
+        imageCounter.textContent = `${currentImageIndex + 1} / ${project.images.length}`;
     }
 }
 
 // Contact functionality
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const contactForm = document.getElementById('contactForm');
 
     if (contactForm) {
@@ -453,11 +453,11 @@ async function submitContactForm(formData) {
             _replyto: formData.get('email')
         })
     });
-    
+
     if (!response.ok) {
         throw new Error('Failed to send message');
     }
-    
+
     return response.json();
 }
 
@@ -466,11 +466,11 @@ function showNotification(message, type = 'info') {
     if (existingNotification) {
         existingNotification.remove();
     }
-    
+
     const notification = document.createElement('div');
     notification.className = `form-notification form-notification-${type}`;
     notification.textContent = message;
-    
+
     notification.style.cssText = `
         position: fixed;
         top: 20px;
@@ -485,20 +485,20 @@ function showNotification(message, type = 'info') {
         transform: translateX(400px);
         transition: transform 0.3s ease;
     `;
-    
+
     const colors = {
         success: '#27ae60',
         error: '#e74c3c',
         info: '#3498db'
     };
-    
+
     notification.style.backgroundColor = colors[type] || colors.info;
     document.body.appendChild(notification);
-    
+
     setTimeout(() => {
         notification.style.transform = 'translateX(0)';
     }, 100);
-    
+
     setTimeout(() => {
         notification.style.transform = 'translateX(400px)';
         setTimeout(() => {
@@ -507,7 +507,7 @@ function showNotification(message, type = 'info') {
             }
         }, 300);
     }, 5000);
-    
+
     notification.addEventListener('click', () => {
         notification.style.transform = 'translateX(400px)';
         setTimeout(() => {

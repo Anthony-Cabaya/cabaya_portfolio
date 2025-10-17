@@ -287,8 +287,19 @@ section {
 
 .career-bg {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 20px;
+}
+
+.career-bg p {
+  line-height: 1.7;
+  margin-top: 6px;
+}
+
+.career-bg em {
+  display: block;
+  font-style: italic;
+  margin: 4px 0;
 }
 
 .career-bg .education-card,
