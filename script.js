@@ -222,6 +222,25 @@ const projectData = [
             github: "https://github.com/Anthony-Cabaya/FeedFishProject",
             pdf: ""
         }
+    },
+    {
+        title: "Support Notes Generator",
+        subtitle: "Website Application",
+        role: ["Web Developer", "UI/UX Designer"],
+        tech: ["HTML", "CSS", "Javascript", "React.js", "Spring Boot"],
+        date: "Dec 2025 - Till now",
+        description:
+            `Built a full-stack React and Spring Boot application for generating 
+        standardized customer support notes with dynamic Tech/Non-Tech report forms. 
+        Features controlled form inputs, automated formatting with empty field handling, 
+        clipboard copy functionality, and responsive mobile design. Utilized React hooks 
+        for state management and Spring Boot for backend data persistence and scalability.`,
+        images: ["assets/supp-notesgen/supp-notesgen_profile.png"],
+        links: {
+            website: "https://support-notes-generator.netlify.app/",
+            github: "https://github.com/Anthony-Cabaya/notes-generator",
+            pdf: ""
+        }
     }
 ];
 
